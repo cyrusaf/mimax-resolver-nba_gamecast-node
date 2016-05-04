@@ -6,30 +6,35 @@ class Player {
   constructor(name, abr, score) {
     this.name  = name
     this.score = score
+    this.show_score = true
+    if (score == '') {
+      this.show_score = false
+    }
     this.abr   = abr.toLowerCase()
   }
 }
 
 class Game {
   constructor(home, away, in_progress, period_num, game_clock, period_status) {
-    this.home        = home
-    this.away        = away
-    this.in_progress = in_progress
-    this.period_num  = period_num
-    this.game_clock  = game_clock
+    this.home          = home
+    this.away          = away
+    this.in_progress   = in_progress
+    this.period_num    = period_num
+    this.game_clock    = game_clock
     this.period_status = period_status
+    this.url           = null
   }
 
   static fromUrl(url) {
     // Fetch ID from url
     let matches = /nba\.com\/gametracker\/#\/(\d+)\/([^\/]+)\//g.exec(url)
-    console.log(url)
     if (!matches) {
       throw new Error('Not valid nba.com gametracker URL.')
     }
     let day_id = matches[1]
     let game_url = matches[2]
-    let game = Game.fromId(day_id, game_url)
+    let game = Game.fromId(day_id, game_url, url)
+    game.url = url
 
     //console.log(game)
     return game
@@ -46,7 +51,6 @@ class Game {
     // Find correct game using day_id and game_url then assign to data
     let data;
     for (let game of games) {
-      console.log(game['game_url'] + " || " + `${day_id}/${game_url}`)
       if (game['game_url'] === `${day_id}/${game_url}`) {
         data = game
         break
@@ -61,11 +65,9 @@ class Game {
     let away = new Player(data.visitor.nickname, data.visitor.abbreviation, data.visitor.score)
 
     // If if game is in progress
-    // TODO: Add logic for games that have not started yet
     let game_clock    = null
     let period_num    = null
     let period_status = data['period_time']['period_status']
-    console.log(period_status)
     let in_progress = true
     if (period_status === "Final") {
       in_progress = false
