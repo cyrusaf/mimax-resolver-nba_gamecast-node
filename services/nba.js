@@ -11,12 +11,13 @@ class Player {
 }
 
 class Game {
-  constructor(home, away, in_progress, period_num, game_clock) {
+  constructor(home, away, in_progress, period_num, game_clock, period_status) {
     this.home        = home
     this.away        = away
     this.in_progress = in_progress
     this.period_num  = period_num
     this.game_clock  = game_clock
+    this.period_status = period_status
   }
 
   static fromUrl(url) {
@@ -61,17 +62,20 @@ class Game {
 
     // If if game is in progress
     // TODO: Add logic for games that have not started yet
-    let game_clock  = null
-    let period_num  = null
+    let game_clock    = null
+    let period_num    = null
+    let period_status = data['period_time']['period_status']
+    console.log(period_status)
     let in_progress = true
-    if (data['period_time']['period_status'] === "Final") {
+    if (period_status === "Final") {
       in_progress = false
+
     }
     if (in_progress) {
       game_clock = data['period_time']['game_clock']
       period_num = data['period_time']['period_value']
     }
-    return new Game(home, away, in_progress, period_num, game_clock)
+    return new Game(home, away, in_progress, period_num, game_clock, period_status)
   }
 }
 
