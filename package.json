@@ -13,6 +13,7 @@
     "cors": "^2.7.1",
     "express": "^4.13.4",
     "handlebars": "^4.0.5",
+    "juice": "^1.10.0",
     "request": "^2.72.0",
     "request-promise": "^3.0.0",
     "synchronize": "^0.9.15"

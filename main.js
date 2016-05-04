@@ -1,11 +1,12 @@
-let request = require('request')
-let sync    = require('synchronize')
-let fs      = require('fs');
-let https   = require('https');
-let express = require('express')
-let cors    = require('cors');
-let Handlebars = require('handlebars');
-let app     = express()
+let request    = require('request')
+let sync       = require('synchronize')
+let fs         = require('fs')
+let https      = require('https')
+let express    = require('express')
+let juice      = require('juice')
+let cors       = require('cors')
+let Handlebars = require('handlebars')
+let app        = express()
 
 let nba    = require('./services/nba')
 
@@ -35,7 +36,7 @@ app.get('/resolver', cors(corsOptions), function(req, res) {
   let source   = fs.readFileSync("templates/nba_widget.hbs", "utf8")
   var template = Handlebars.compile(source);
   res.json({
-    body: template(game)
+    body: juice(template(game))
   })
 })
 
