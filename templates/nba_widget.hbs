@@ -1,0 +1,44 @@
+<style>
+  .container {
+    background: #ccc;
+    display: flex;
+    width: 400px;
+    justify-content: space-between;
+
+    font-family: 'Open Sans';
+  }
+
+  .team {
+    width: 100px;
+  }
+
+  .score {
+    text-align: center;
+    width: 100px;
+    font-size: 2em;
+    font-weight: 800;
+  }
+
+  .time {
+    background: #333;
+    width: 200px;
+  }
+</style>
+
+<div class="container">
+
+  <div class="team home">
+    <img width="100px" src="http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/{{home.abr}}.png">
+    <div class="score">{{home.score}}</div>
+  </div>
+
+  <div class="time">
+    time
+  </div>
+
+  <div class="team away">
+    <img width="100px" src="http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/{{away.abr}}.png">
+    <div class="score">{{away.score}}</div>
+  </div>
+
+</div>
