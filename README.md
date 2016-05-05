@@ -1,4 +1,7 @@
 # NBA.com Game Tracker Resolver
+### Requirements
+This server requires NodeJS v6.0.0+ since it uses many new es6 features.
+
 ### Adding the Link Resolver to Mixmax
 **URL Regex:** `nba.com/gametracker/#/\d+/`
 
