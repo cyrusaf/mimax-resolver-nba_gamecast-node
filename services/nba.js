@@ -2,7 +2,7 @@ let request = require('request')
 let cheerio = require('cheerio')
 let sync    = require ('synchronize')
 
-class Player {
+class Team {
   constructor(name, abr, score) {
     this.name  = name
     this.score = score
@@ -23,6 +23,11 @@ class Game {
     this.game_clock    = game_clock
     this.period_status = period_status
     this.url           = null
+
+    this.show_period = true
+    if (period_num == null || period_num == '') {
+      this.show_period = false
+    }
   }
 
   static fromUrl(url) {
@@ -61,8 +66,8 @@ class Game {
     }
 
     // Create home and away teams
-    let home = new Player(data.home.nickname, data.home.abbreviation, data.home.score)
-    let away = new Player(data.visitor.nickname, data.visitor.abbreviation, data.visitor.score)
+    let home = new Team(data.home.nickname, data.home.abbreviation, data.home.score)
+    let away = new Team(data.visitor.nickname, data.visitor.abbreviation, data.visitor.score)
 
     // If if game is in progress
     let game_clock    = null
@@ -82,6 +87,6 @@ class Game {
 }
 
 module.exports = {
-  Player: Player,
+  Team: Team,
   Game: Game
 }

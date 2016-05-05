@@ -43,6 +43,17 @@
     font-size: 1.5em;
     font-weight: 400;
   }
+
+  .time .game_clock {
+    width: 100%;
+    text-align: center;
+  }
+
+  .time .period_num {
+    width: 100%;
+    margin-top: 7px;
+    text-align: center;
+  }
 </style>
 
 <a class="container" href="{{url}}">
@@ -54,8 +65,8 @@
 
   <div class="time">
     <div class="status">{{period_status}}</div>
+    {{#if show_period}}<div class="period_num">Period {{period_num}}</div>{{/if}}
     <div class="game_clock">{{game_clock}}</div>
-    <div class="period_num">{{period_num}}</div>
   </div>
 
   <div class="team away">
